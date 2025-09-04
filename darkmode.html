@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>News homepage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+
+
+  <style>
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+p{
+    line-height: 1.5;
+}
+body{
+    min-height: 100vh;
+    color: hsl(236, 13%, 42%);
+    background: hsl(35, 90%, 4%);
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    position: relative;
+}
+.container{
+    position: relative;
+}
+.overlay{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 0;
+    pointer-events: none;
+}
+.container.active .overlay{
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(6px);
+}
+
+.container nav{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 16px; 
+}
+.nav__logo{
+    max-width: 50px;
+}
+.dark-mode{
+    width: 30px;
+    cursor: pointer;
+    }
+.nav__menu{
+    width: 40px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    z-index: 100;
+}
+.hamburger{
+    position: absolute;
+    width: 40px; 
+    height: 3px;
+    background: hsl(240, 11%, 93%);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    -ms-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
+}
+.hamburger::before,.hamburger::after{
+    position: absolute;
+    content: '';
+    width: 40px; 
+    height: 3px;
+    background: hsl(240, 15%, 86%);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    -ms-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
+}
+.hamburger::after{
+    -webkit-transform: translateY(-8px); 
+    -moz-transform: translateY(-8px);
+    -ms-transform: translateY(-8px);
+    -o-transform: translateY(-8px);
+    transform: translateY(-8px);
+}
+.hamburger::before{
+    -webkit-transform: translateY(8px);
+    -moz-transform: translateY(8px);
+    -ms-transform: translateY(8px);
+    -o-transform: translateY(8px);
+    transform: translateY(8px);
+}
+.nav__list{
+    list-style-type: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    background: hsl(37, 90%, 4%);
+    display: flex;
+    flex-direction: column;
+    gap: 24px; 
+    padding-top: 160px;
+    padding-left: 24px; 
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    -o-transform: translateX(100%);
+    transform: translateX(100%);
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    -ms-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
+}
+.nav__list li a{
+    color: hsl(240, 24%, 89%);
+    font-size: 18px;
+    text-decoration: none;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    -ms-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
+}
+.nav__list li a:hover{
+    color: hsl(35, 59%, 53%);
+}
+nav.active .nav__list{
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+}
+nav.active .hamburger{
+    background: transparent;
+    -webkit-transform: translateX(-32px);
+    -moz-transform: translateX(-32px);
+    -ms-transform: translateX(-32px);
+    -o-transform: translateX(-32px);
+    transform: translateX(-32px);
+}
+nav.active .hamburger::before{
+    -webkit-transform: rotate(45deg) translate(24px, -24px); 
+    -moz-transform: rotate(45deg) translate(24px, -24px);
+    -ms-transform: rotate(45deg) translate(24px, -24px);
+    -o-transform: rotate(45deg) translate(24px, -24px);
+    transform: rotate(45deg) translate(24px, -24px);
+}
+nav.active .hamburger::after{
+    -webkit-transform: rotate(-45deg) translate(24px, 24px); 
+    -moz-transform: rotate(-45deg) translate(24px, 24px);
+    -ms-transform: rotate(-45deg) translate(24px, 24px);
+    -o-transform: rotate(-45deg) translate(24px, 24px);
+    transform: rotate(-45deg) translate(24px, 24px);
+}
+.container main{
+    padding: 16px;
+}
+main .top{
+    display: grid;
+    gap: 48px;
+}
+.top__heading--img{
+    width: 100%;
+    margin-bottom: 16px;
+}
+.top__heading--text h1{
+    color: hsl(240, 25%, 87%);
+    font-size: 40px; 
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+.top__heading--text a{
+    display: block;
+    width: max-content;
+    color: hsl(36, 100%, 99%);
+    background: hsl(5, 79%, 54%);
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    margin-top: 24px; 
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    -ms-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
+}
+.top__heading--text a:hover{
+    background: hsl(240, 20%, 82%);
+}
+.top__new{
+    color: hsl(240, 3%, 22%);
+    background: hsl(240, 63%, 65%);
+    padding: 24px 16px;
+}
+.top__new h2{
+    color: hsl(35, 80%, 56%);
+    font-size: 32px;
+    margin-bottom: 32px;
+}
+.top__new--text a{
+    display: block;
+    color: hsl(36, 100%, 99%);
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-bottom: 12px;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    -ms-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
+}
+.top__new--text a:hover{
+    color: hsl(35, 77%, 62%);
+}
+.top__new hr{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid hsl(236, 13%, 42%);
+    margin: 24px 0; 
+}
+main .bottom{
+    display: grid;
+    gap: 32px;
+    margin-top: 80px;
+}
+.bottom__block{
+    display: flex;
+    gap: 24px; 
+}
+.bottom__block--img{
+    max-width: 100px;
+}
+.bottom__block--text h2{
+    color: hsl(233, 8%, 79%);
+    font-size: 32px;
+}
+.bottom__block--text a{
+    display: block;
+    color: hsl(240, 100%, 52%);
+    font-size: 18px;
+    font-weight: 800;
+    text-decoration: none;
+    margin: 12px 0;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    -ms-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
+}
+.bottom__block--text a:hover{
+    color: hsl(5, 85%, 63%);
+}
+footer{
+    text-align: center;
+    margin-bottom: 16px;
+}
+footer a{
+    color: hsl(5, 85%, 63%);
+}
+footer a:hover{
+    text-decoration: none;
+}
+@media(min-width: 850px){
+    .container{
+        padding: 24px 48px;
+    }
+    .nav__logo{
+        max-width: 100%;
+    }
+    .dark-mode{
+    width: 30px;
+    cursor: pointer;
+    }
+    .nav__menu{
+        display: none;
+    }
+    .nav__list{
+        position: unset;
+        width: max-content;
+        flex-direction: row;
+        padding-top: 0;
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+    main .top{
+        grid-template-columns: auto auto;
+    }
+}
+@media(min-width: 1200px){
+    body{
+        font-size: 16px;
+    }
+    .container{
+        padding: 48px 112px;
+    }
+    .nav__list{
+        gap: 40px; 
+    }
+    main .top{
+        grid-template-columns: 2fr 1fr;
+    }
+    .top__heading--text{
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: end;
+        gap: 32px;
+    }
+    .top__heading--text h1{
+        font-size: 56px;
+        line-height: 1;
+        margin-bottom: 8px;
+    }
+    .top__heading--text div{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .top__heading--text a{
+        margin-top: 32px;
+    }
+    .top__new{
+        padding: 24px; 
+    }
+    .top__new h2{
+        font-size: 40px; 
+    }
+    main .bottom {
+    display: flex;
+    gap: 40px; 
+}
+
+main .bottom > div {
+    flex: 1; /* Each child grows equally */
+}
+
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="overlay"></div>
+    <nav>
+      <a href="#"><img src="./assets/images/logowhite.png" alt="Home | News homepage" class="nav__logo"></a>
+      <div class="nav__menu">
+        <div class="hamburger"></div>
+      </div>
+      <ul class="nav__list">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">New</a></li>
+        <li><a href="#">Popular</a></li>
+        <li><a href="#">Trending</a></li>
+        <li><a href="#">Categories</a></li>
+        <a href="main.html"><img src="./assets/images/light-mode.png" class="dark-mode" ></a>
+      </ul>
+    </nav>
+    <main>
+      <div class="top">
+        <div class="top__heading">
+          <picture>
+            <source media="(min-width: 850px)" srcset="./assets/images/image-web-3-desktop.jpg">
+            <img src="./assets/images/image-web-3-mobile.jpg" alt="" class="top__heading--img">
+          </picture>
+          <section class="top__heading--text">
+            <h1>The Bright Future of Web 3.0?</h1>
+            <div>
+              <p>We dive into the next evolution of the web that claims to put the power of the platforms back into the hands of the people. 
+                But is it really fulfilling its promise?</p>
+              <a href="#">Read more</a>
+            </div>
+          </section>
+        </div>
+        <section class="top__new">
+          <h2>New</h2>
+          <div class="top__new--text">
+            <a href="#">Hydrogen VS Electric Cars</a>
+            <p>Will hydrogen-fueled cars ever catch up to EVs?</p>
+          </div>
+          <hr>
+          <div class="top__new--text">
+            <a href="#">The Downsides of AI Artistry</a>
+            <p>What are the possible adverse effects of on-demand AI image generation?</p>
+          </div>
+          <hr>
+          <div class="top__new--text">
+            <a href="#">Is VC Funding Drying Up?</a>
+            <p>Private funding by VC firms is down 50% YOY. We take a look at what that means.</p>
+          </div>
+        </section>
+      </div>
+      <div class="bottom">
+        <div class="bottom__block">
+          <img class="bottom__block--img" src="./assets/images/image-retro-pcs.jpg" alt="retor pc">
+          <div class="bottom__block--text">
+            <h2>01</h2>
+            <a href="#">Reviving Retro PCs</a>
+            <p>What happens when old PCs are given modern upgrades?</p>
+          </div>
+        </div>
+        <div class="bottom__block">
+          <img class="bottom__block--img" src="./assets/images/image-top-laptops.jpg" alt="keyboard">
+          <div class="bottom__block--text">
+            <h2>02</h2>
+            <a href="#">Top 10 Laptops of 2022</a>
+            <p>Our best picks for various needs and budgets.</p>
+          </div>
+        </div>
+        <div class="bottom__block">
+          <img class="bottom__block--img" src="./assets/images/image-gaming-growth.jpg" alt="console">
+          <div class="bottom__block--text">
+            <h2>03</h2>
+            <a href="#">The Growth of Gaming</a>
+            <p>How the pandemic has sparked fresh opportunities.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer>
+        <small>Made by <a href="https://github.com/snmallick2401" target="_blank">S. N. Mallick</a> | Copyright &copy; <span id="current-year"></span></small>
+    </footer>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    const container = document.querySelector('.container');
+const nav = document.querySelector('nav');
+const toggleMenu = document.querySelector('.nav__menu');
+const navLinks = document.querySelectorAll('.nav__list li a')
+
+toggleMenu.addEventListener('click',()=>{
+    nav.classList.toggle('active');
+    container.classList.toggle('active');
+    if(nav.classList.contains('active')){
+        document.body.style.overflow = "hidden";
+    }else{
+        document.body.style.overflow = "visible";
+    }
+})
+
+navLinks.forEach(link => {
+    link.addEventListener('click',()=>{
+        nav.classList.remove('active');
+        container.classList.remove('active');
+        document.body.style.overflow = "visible";
+    })
+})
+
+  </script>
+</body>
+</html>
