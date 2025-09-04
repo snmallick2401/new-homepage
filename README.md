@@ -1,7 +1,3 @@
-Here’s a well-structured **README.md** you can use for your GitHub repository:
-
----
-
 # 📰 News Homepage
 
 A responsive **news homepage** built using **HTML, CSS, and JavaScript**. The project replicates a modern news landing page layout with navigation, featured news, trending articles, and categories. It also includes a dark mode option and a mobile-friendly hamburger menu.
